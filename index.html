@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f8fc">
+<title>STUDY NOTE</title>
+<style>
+:root{--bg:#f6f7fb;--panel:#fff;--ink:#202432;--muted:#778092;--line:#e8eaf0;--accent:#5968d9;--soft:#eef0ff;--danger:#d95365;--shadow:0 8px 28px rgba(35,43,70,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}.app{max-width:1200px;margin:auto;min-height:100vh;padding:22px}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}.brand{font-size:22px;font-weight:850;letter-spacing:-.7px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;font-weight:600}.top-actions{display:flex;gap:8px}.btn{background:var(--accent);color:#fff;border-radius:11px;padding:10px 14px;font-weight:700}.btn.secondary{background:var(--soft);color:var(--accent)}.btn.ghost{background:#f2f3f7;color:#555d70}.btn.danger{background:#fff0f1;color:var(--danger)}.layout{display:grid;grid-template-columns:215px 1fr;gap:20px}.side,.card,.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.side{padding:12px;height:max-content;position:sticky;top:15px}.nav{display:flex;align-items:center;gap:11px;width:100%;padding:12px;border-radius:11px;background:transparent;color:#60697b;text-align:left;margin:2px 0}.nav.active{background:var(--soft);color:var(--accent);font-weight:800}.nav span{width:22px;text-align:center}.content{min-width:0}.welcome{margin:2px 0 18px}.welcome h1{font-size:25px;margin:0 0 4px;letter-spacing:-1px}.muted{color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.stat{padding:16px}.stat b{font-size:23px;display:block;margin-top:6px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:20px 0 12px}.section-head h2{font-size:19px;margin:0}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{padding:17px}.empty{padding:30px;text-align:center;color:var(--muted);border:1px dashed #d8dce6;border-radius:14px;background:#fcfcfe}.item{padding:13px 0;border-bottom:1px solid var(--line)}.item:last-child{border:0}.item-title{font-weight:750}.meta{font-size:12px;color:var(--muted);margin-top:4px}.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.grow{flex:1}.small{font-size:12px}.pill{display:inline-block;background:#f0f1f6;color:#60697b;border-radius:20px;padding:4px 9px;font-size:11px}.form{display:grid;gap:11px}.form label{display:grid;gap:5px;font-size:13px;font-weight:700;color:#555e70}.form input,.form textarea,.form select,.search{width:100%;padding:11px 12px;border:1px solid #dfe2ea;border-radius:10px;background:#fff;color:var(--ink);outline:none}.form textarea{min-height:100px;resize:vertical}.form input:focus,.form textarea:focus,.form select:focus{border-color:var(--accent)}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.modal{position:fixed;inset:0;background:#171b2b66;display:none;align-items:center;justify-content:center;padding:15px;z-index:10}.modal.show{display:flex}.dialog{background:#fff;border-radius:18px;width:min(580px,100%);max-height:90vh;overflow:auto;padding:20px}.dialog h2{margin:0 0 15px}.filelist{display:flex;flex-wrap:wrap;gap:8px}.filechip{background:#f2f3f8;padding:7px 10px;border-radius:9px;font-size:12px}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.day{background:#fff;border:1px solid var(--line);border-radius:9px;min-height:72px;padding:7px;font-size:12px}.day.today{border:2px solid var(--accent)}.day .dot{display:block;background:var(--soft);color:var(--accent);border-radius:5px;padding:2px 4px;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.flash{background:#f8f8ff;border:1px solid #e3e5ff;border-radius:16px;padding:30px;text-align:center;min-height:170px;display:grid;place-content:center;gap:15px}.flash strong{font-size:22px}.hidden{display:none!important}footer{text-align:center;color:#a0a5b1;font-size:11px;padding:25px}
+@media(max-width:760px){.app{padding:15px}.layout{display:block}.side{position:sticky;top:0;z-index:5;display:flex;overflow:auto;padding:7px;margin-bottom:16px;border-radius:13px}.nav{white-space:nowrap;width:auto;padding:9px 11px;font-size:12px}.nav span{width:auto}.nav .navtext{display:inline}.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.welcome h1{font-size:22px}.side{box-shadow:0 5px 15px #2024320a}}
+@media(min-width:761px){.nav .navtext{display:inline}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand">STUDY NOTE<small>YOUR DIGITAL STUDY SPACE</small></div><div class="top-actions"><button class="btn secondary" id="backupBtn">백업</button><button class="btn secondary" id="restoreBtn">복구</button><input id="restoreFile" type="file" accept="application/json" hidden></div></header>
+<div class="layout">
+<nav class="side" id="nav">
+<button class="nav active" data-page="home"><span>⌂</span><span class="navtext">홈</span></button>
+<button class="nav" data-page="notes"><span>▤</span><span class="navtext">내 필기</span></button>
+<button class="nav" data-page="mistakes"><span>✎</span><span class="navtext">오답 노트</span></button>
+<button class="nav" data-page="files"><span>▣</span><span class="navtext">자료실</span></button>
+<button class="nav" data-page="schedule"><span>▦</span><span class="navtext">일정</span></button>
+<button class="nav" data-page="cards"><span>▧</span><span class="navtext">암기 카드</span></button>
+<button class="nav" data-page="exams"><span>▥</span><span class="navtext">시험 관리</span></button>
+<button class="nav" data-page="stats"><span>◷</span><span class="navtext">통계</span></button>
+</nav>
+<main class="content" id="main"></main>
+</div>
+<footer>STUDY NOTE · 자료는 현재 사용 중인 브라우저에 저장됩니다.</footer>
+</div>
+<div class="modal" id="modal"><div class="dialog"><div class="row"><h2 class="grow" id="modalTitle">자료 추가</h2><button class="btn ghost" id="closeModal">닫기</button></div><div id="modalBody"></div></div></div>
+<script>
+const DB='study-note-v1', STORE='records';
+let db, page='home', activeFlash=null, showAnswer=false, timerStart=null, timerInt=null;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function openDB(){return new Promise((resolve,reject)=>{let r=indexedDB.open(DB,1);r.onupgradeneeded=()=>r.result.createObjectStore(STORE,{keyPath:'id'});r.onsuccess=()=>{db=r.result;resolve()};r.onerror=()=>reject(r.error)})}
+function all(){return new Promise((res,rej)=>{let r=db.transaction(STORE).objectStore(STORE).getAll();r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
+function put(v){return new Promise((res,rej)=>{let r=db.transaction(STORE,'readwrite').objectStore(STORE).put(v);r.onsuccess=()=>res();r.onerror=()=>rej(r.error)})}
+function del(id){return new Promise((res,rej)=>{let r=db.transaction(STORE,'readwrite').objectStore(STORE).delete(id);r.onsuccess=()=>res();r.onerror=()=>rej(r.error)})}
+const id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const date=()=>new Date().toISOString().slice(0,10);
+const records=async type=>(await all()).filter(x=>x.type===type).sort((a,b)=>(b.updated||b.created||'').localeCompare(a.updated||a.created||''));
+function modal(title,html){$('#modalTitle').textContent=title;$('#modalBody').innerHTML=html;$('#modal').classList.add('show')}
+function close(){ $('#modal').classList.remove('show') }
+$('#closeModal').onclick=close;$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')close()});
+function field(label,name,placeholder='',type='text',value=''){return `<label>${label}<input name="${name}" type="${type}" placeholder="${placeholder}" value="${esc(value)}"></label>`}
+function area(label,name,placeholder='',value=''){return `<label>${label}<textarea name="${name}" placeholder="${placeholder}">${esc(value)}</textarea></label>`}
+function select(label,name,opts,value=''){return `<label>${label}<select name="${name}">${opts.map(x=>`<option ${x===value?'selected':''}>${esc(x)}</option>`).join('')}</select></label>`}
+function fileField(label='사진 또는 파일 첨부'){return `<label>${label}<input name="files" type="file" multiple accept="image/*,.pdf,.doc,.docx,.ppt,.pptx,.xlsx"></label>`}
+async function filesFrom(input){let arr=[];for(let f of input.files||[]){if(f.size>12*1024*1024){alert(f.name+' 파일은 12MB를 초과해 제외했어.');continue}arr.push({name:f.name,type:f.type,data:await new Promise(r=>{let fr=new FileReader();fr.onload=()=>r(fr.result);fr.readAsDataURL(f)})})}return arr}
+function attachments(a=[]){return `<div class="filelist">${a.map(f=>`<a class="filechip" href="${f.data}" download="${esc(f.name)}" target="_blank">${esc(f.name)}</a>`).join('')}</div>`}
+function empty(msg){return `<div class="empty">${msg}</div>`}
+function itemCard(r,kind){return `<div class="item"><div class="row"><div class="item-title grow">${esc(r.title||'(제목 없음)')}</div><span class="pill">${esc(r.subject||kind)}</span></div><div class="meta">${esc(r.date||r.created||'')} ${r.tag?'· '+esc(r.tag):''}</div>${r.body?`<p>${esc(r.body).replace(/\n/g,'<br>')}</p>`:''}${r.attachments?.length?attachments(r.attachments):''}<div class="actions"><button class="btn ghost small" onclick="editRecord('${r.id}')">수정</button><button class="btn danger small" onclick="removeRecord('${r.id}')">삭제</button>${kind==='오답'?`<button class="btn secondary small" onclick="toggleDone('${r.id}')">${r.done?'복습 완료':'복습 체크'}</button>`:''}</div></div>`}
+async function render(){
+ document.querySelectorAll('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+ const main=$('#main'), rs=await all(), notes=rs.filter(x=>x.type==='note'), mistakes=rs.filter(x=>x.type==='mistake'), schedules=rs.filter(x=>x.type==='schedule'), cards=rs.filter(x=>x.type==='card');
+ const title={home:'안녕하세요! 오늘의 공부를 시작해 볼까요?',notes:'내 필기',mistakes:'오답 노트',files:'자료실',schedule:'일정 관리',cards:'암기 카드',exams:'시험 관리',stats:'학습 통계'}[page];
+ let html=`<div class="welcome"><h1>${title}</h1><div class="muted">${new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'})}</div></div>`;
+ if(page==='home'){
+ html+=`<div class="stats"><div class="card stat"><span class="muted small">필기 자료</span><b>${notes.length}</b></div><div class="card stat"><span class="muted small">오답 기록</span><b>${mistakes.length}</b></div><div class="card stat"><span class="muted small">예정 일정</span><b>${schedules.filter(x=>x.date>=date()).length}</b></div><div class="card stat"><span class="muted small">암기 카드</span><b>${cards.length}</b></div></div><div class="section-head"><h2>빠른 추가</h2></div><div class="grid2"><div class="card"><h3>✎ 필기 작성</h3><p class="muted small">수업 내용과 공부한 내용을 기록해 보세요.</p><button class="btn" onclick="newRecord('note')">필기 추가</button></div><div class="card"><h3>▤ 오답 등록</h3><p class="muted small">틀린 문제 사진과 풀이를 보관하세요.</p><button class="btn" onclick="newRecord('mistake')">오답 추가</button></div></div><div class="section-head"><h2>다가오는 일정</h2><button class="btn secondary small" onclick="go('schedule')">전체 보기</button></div><div class="card">${schedules.filter(x=>x.date>=date()).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,4).map(x=>`<div class="item"><b>${esc(x.title)}</b><div class="meta">${esc(x.date)} · ${esc(x.subject||'일반')}</div></div>`).join('')||empty('등록된 일정이 없어.')}</div><div class="section-head"><h2>최근 필기</h2><button class="btn secondary small" onclick="go('notes')">전체 보기</button></div><div class="card">${notes.slice(0,3).map(x=>itemCard(x,'필기')).join('')||empty('아직 작성한 필기가 없어.')}</div>`;
+ }
+ if(page==='notes'||page==='mistakes'||page==='files'){
+ let type=page==='notes'?'note':page==='mistakes'?'mistake':'file', label=page==='notes'?'필기 추가':page==='mistakes'?'오답 추가':'자료 추가', list=rs.filter(x=>x.type===type);
+ html+=`<div class="section-head"><input class="search" id="search" placeholder="제목·과목·내용 검색"><button class="btn" onclick="newRecord('${type}')">+ ${label}</button></div><div class="card" id="recordList">${list.map(x=>itemCard(x,page==='mistakes'?'오답':page==='notes'?'필기':'자료')).join('')||empty('아직 등록된 자료가 없어. 위 버튼으로 추가해 봐!')}</div>`;
+ }
+ if(page==='schedule'){
+ let list=schedules.sort((a,b)=>a.date.localeCompare(b.date));
+ html+=`<div class="section-head"><h2>일정 목록</h2><button class="btn" onclick="newRecord('schedule')">+ 일정 추가</button></div><div class="card">${list.map(x=>`<div class="item"><div class="row"><b class="grow">${esc(x.title)}</b><span class="pill">${esc(x.date)}</span></div><div class="meta">${esc(x.subject||'일반')} ${x.body?'· '+esc(x.body):''}</div><div class="actions"><button class="btn ghost small" onclick="editRecord('${x.id}')">수정</button><button class="btn danger small" onclick="removeRecord('${x.id}')">삭제</button></div></div>`).join('')||empty('등록된 일정이 없어.')}</div>`;
+ }
+ if(page==='cards'){
+ html+=`<div class="section-head"><h2>내 암기 카드</h2><button class="btn" onclick="newRecord('card')">+ 카드 만들기</button></div><div class="card">${cards.length?`<div class="flash" id="flash"><span class="pill">질문</span><strong id="flashText">카드를 불러오는 중...</strong><div class="row" style="justify-content:center"><button class="btn secondary" onclick="flipFlash()">정답 보기</button><button class="btn ghost" onclick="nextFlash()">다음 카드</button></div></div><div class="section-head"><span class="muted small" id="flashCount"></span></div>`:empty('암기 카드를 만들어 보세요.')}${cards.map(x=>`<div class="item"><b>${esc(x.title)}</b><div class="meta">${esc(x.subject||'')}</div><div class="actions"><button class="btn ghost small" onclick="editRecord('${x.id}')">수정</button><button class="btn danger small" onclick="removeRecord('${x.id}')">삭제</button></div></div>`).join('')}</div>`;
+ }
+ if(page==='exams'){
+ let exams=rs.filter(x=>x.type==='exam');
+ html+=`<div class="section-head"><h2>시험 및 성적</h2><button class="btn" onclick="newRecord('exam')">+ 시험 등록</button></div><div class="card">${exams.map(x=>`<div class="item"><b>${esc(x.title)}</b><div class="meta">${esc(x.date)} · ${esc(x.subject||'')}</div><p>점수: ${esc(x.score||'-')}점 · 등급: ${esc(x.grade||'-')}</p>${x.body?`<div class="muted small">${esc(x.body)}</div>`:''}<div class="actions"><button class="btn ghost small" onclick="editRecord('${x.id}')">수정</button><button class="btn danger small" onclick="removeRecord('${x.id}')">삭제</button></div></div>`).join('')||empty('시험과 성적을 기록해 보세요.')}</div>`;
+ }
+ if(page==='stats'){
+ let done=mistakes.filter(x=>x.done).length, total=mistakes.length, hours=rs.filter(x=>x.type==='studytime').reduce((a,x)=>a+(x.minutes||0),0);
+ html+=`<div class="stats"><div class="card stat"><span class="muted small">필기 자료</span><b>${notes.length}</b></div><div class="card stat"><span class="muted small">오답 자료</span><b>${total}</b></div><div class="card stat"><span class="muted small">복습 완료</span><b>${done}</b></div><div class="card stat"><span class="muted small">공부 시간</span><b>${Math.floor(hours/60)}h ${hours%60}m</b></div></div><div class="card"><h3>오답 복습률</h3><div style="height:12px;background:#eef0f5;border-radius:20px;overflow:hidden"><div style="height:100%;width:${total?done/total*100:0}%;background:var(--accent)"></div></div><p class="muted small">${total?Math.round(done/total*100):0}% (${done}/${total})</p><p class="muted small">공부 시간은 타이머 기록 기능을 추후 추가해 누적할 수 있어. 현재 버전은 필기·오답·일정·시험 기록 중심이야.</p></div>`;
+ }
+ main.innerHTML=html;
+ if($('#search'))$('#search').addEventListener('input',e=>{let q=e.target.value.toLowerCase();$('#recordList').innerHTML=rs.filter(x=>x.type===(page==='notes'?'note':page==='mistakes'?'mistake':'file')).filter(x=>(x.title+x.subject+x.body).toLowerCase().includes(q)).map(x=>itemCard(x,page==='mistakes'?'오답':page==='notes'?'필기':'자료')).join('')||empty('검색 결과가 없어.')});
+ if(page==='cards'&&cards.length){activeFlash=cards;showAnswer=false;drawFlash()}
+}
+function go(p){page=p;render()}
+$('#nav').addEventListener('click',e=>{let b=e.target.closest('[data-page]');if(b)go(b.dataset.page)});
+window.newRecord=type=>recordForm(type,null);
+window.editRecord=async rid=>{let r=(await all()).find(x=>x.id===rid);if(r)recordForm(r.type,r)};
+function recordForm(type,r){
+ let config={note:['필기','제목','내용'],mistake:['오답 노트','문제/단원','풀이 및 메모'],file:['자료실','자료 제목','설명'],schedule:['일정','일정 제목','메모'],card:['암기 카드','질문','정답'],exam:['시험 기록','시험 이름','시험 범위 또는 메모']}[type];
+ let html=`<form class="form" id="recordForm">${field('제목', 'title','제목을 입력해 줘', 'text',r?.title||'')}${select('과목','subject',['공통','국어','영어','수학','한국사','통합사회','통합과학','과학','기타'],r?.subject||'공통')}${type==='schedule'||type==='exam'?field('날짜','date','','date',r?.date||date()):''}${type==='exam'?field('점수','score','예: 92','number',r?.score||'')+(select('등급','grade',['미입력','1등급','2등급','3등급','4등급','5등급'],r?.grade||'미입력')):''}${type==='mistake'?select('오답 원인','reason',['개념 부족','계산 실수','문제 해석 오류','암기 부족','시간 부족','기타'],r?.reason||'개념 부족'):''}${type==='card'?area('정답','answer','정답을 입력해 줘',r?.answer||''):area(config[0]==='암기 카드'?'':config[2], 'body',config[2]+'을 입력해 줘',r?.body||'')}${type==='note'||type==='mistake'||type==='file'?fileField():''}<div class="row"><button class="btn" type="submit">저장</button><button class="btn ghost" type="button" onclick="close()">취소</button></div></form>`;
+ modal((r?'수정하기':'새로 만들기')+' · '+config[0],html);
+ $('#recordForm').onsubmit=async e=>{e.preventDefault();let f=e.target, fd=new FormData(f), att=type==='note'||type==='mistake'||type==='file'?await filesFrom(f.files):r?.attachments||[];let obj={...(r||{}),id:r?.id||id(),type,title:fd.get('title'),subject:fd.get('subject'),body:fd.get('body')||'',date:fd.get('date')||r?.date||date(),attachments:att,updated:new Date().toISOString(),created:r?.created||new Date().toISOString(),reason:fd.get('reason')||r?.reason||'',answer:fd.get('answer')||r?.answer||'',score:fd.get('score')||r?.score||'',grade:fd.get('grade')||r?.grade||'',done:r?.done||false};await put(obj);close();render()};
+}
+window.removeRecord=async rid=>{if(confirm('이 자료를 삭제할까?')){await del(rid);render()}};
+window.toggleDone=async rid=>{let r=(await all()).find(x=>x.id===rid);r.done=!r.done;await put(r);render()};
+function drawFlash(){let r=activeFlash[Math.floor(Math.random()*activeFlash.length)];window.currentFlash=r;$('#flashText').textContent=showAnswer?(r.answer||r.body):r.title;$('#flash').querySelector('.pill').textContent=showAnswer?'정답':'질문';$('#flashCount').textContent=`전체 ${activeFlash.length}개 카드`; }
+window.flipFlash=()=>{showAnswer=!showAnswer;drawFlash()};window.nextFlash=()=>{showAnswer=false;drawFlash()};
+$('#backupBtn').onclick=async()=>{let data=await all();let blob=new Blob([JSON.stringify({app:'STUDY NOTE',version:1,exportedAt:new Date().toISOString(),records:data})],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='study-note-backup-'+date()+'.json';a.click();URL.revokeObjectURL(a.href)};
+$('#restoreBtn').onclick=()=>$('#restoreFile').click();
+$('#restoreFile').onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());if(!Array.isArray(d.records))throw 0;if(!confirm('백업 자료를 현재 자료에 추가할까? 같은 ID의 자료는 덮어써.'))return;for(let r of d.records)await put(r);alert('복구가 완료됐어.');render()}catch{alert('올바른 STUDY NOTE 백업 파일이 아니야.')}e.target.value=''};
+openDB().then(render).catch(()=>{$('#main').innerHTML='<div class="empty">이 브라우저에서 저장 기능을 사용할 수 없어. 최신 Safari, Chrome 또는 Edge를 이용해 줘.</div>'});
+</script>
+</body></html>
